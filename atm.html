@@ -1,0 +1,193 @@
+<html>
+
+<head>
+
+	<script>
+		var saldo = 100.5; //Float 1.36
+		var senhacartao = 3589;
+
+		function inicio() {
+			var escolha = parseInt(prompt(
+					'Selecione uma dessas opções 1.) Saldo 2.) Extrato 3.) Saque 4.) Depósito 5.) Transferência 6.) Sair'
+					));
+
+			switch (escolha) {
+				case 1:
+					ver_saldo();
+					break;
+				case 2:
+					extrato();
+					break;
+				case 3:
+					fazer_saque();
+					break;
+				case 4:
+					fazer_deposito();
+					break;
+				case 5:
+					transferencia();
+					break;
+				case 6:
+					sair();
+					break;
+				default:
+					erro();
+					break;
+			}
+		}
+
+		function ver_saldo() {
+			var senhainformada = prompt("Informe sua senha");
+			if (senhainformada == senhacartao) {
+				alert(nome + ' seu saldo atual é de: ' + saldo);
+				inicio();
+			} else {
+				alert('Senha inválida, tente novamente!');
+				ver_saldo();
+			}
+		}
+
+		function extrato() {
+			var senhainformada = prompt("Informe sua senha");
+			if (senhainformada == senhacartao) {
+				alert('Bíblia: R$ 35,00 \nViagem para Maldivas: R$ 300.00 \nComida do mês: R$ 770,00');
+				inicio();
+			} else {
+				alert('Senha inválida, tente novamente!');
+				extrato();
+			}
+		}
+
+		function fazer_saque() {
+			var senhainformada = prompt("Informe sua senha");
+			if (senhainformada == senhacartao) {
+
+				verificasaque();
+
+				function verificasaque() {
+					var saque = parseFloat(prompt('Qual o valor para saque?'));
+					if (isNaN(saque) || saque === "" || saque <= 0) {
+						alert('Por favor, informe um número válido');
+						verificasaque();
+					} else {
+						if (saque > saldo) {
+							alert('Operação não autorizada');
+							verificasaque();
+						} else {
+							saldo -= saque;
+							alert(nome + ' seu saldo atual é de: ' + saldo);
+						}
+						inicio();
+					}
+				}
+			} else {
+				alert('Senha inválida, tente novamente!');
+				fazer_saque();
+			}
+		}
+
+		function fazer_deposito() {
+			var senhainformada = prompt("Informe sua senha");
+			if (senhainformada == senhacartao) {
+				verificadeposito();
+
+				function verificadeposito() {
+					var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+					if (isNaN(deposito) || deposito === "") {
+						alert('Por favor, informe um número válido');
+						verificadeposito();
+					}
+					else{
+						if (deposito <= 0) {
+							alert('Operação não autorizada');
+							verificadeposito();
+						}
+						else{
+						saldo += deposito;
+							alert(nome + ' seu saldo atual é de: ' + saldo);
+							inicio();
+						}
+					}
+				}
+			} else {
+				alert('Senha inválida, tente novamente!');
+				fazer_deposito();
+			}
+		}
+
+		function transferencia() {
+			var senhainformada = prompt("Informe sua senha");
+			if (senhainformada == senhacartao) {
+				var destinatario = parseInt(prompt('Insira a conta que você vai enviar dinheiro'));
+				verificatransf();
+
+				function verificatransf() {
+					var transf = parseFloat(prompt('Qual o valor para transferencia?'));
+					switch (isNaN(transf) || transf === "" || transf <= 0 || transf > saldo) {
+						case true:
+							alert('Operação não autorizada! Por favor, informe um número válido');
+							verificatransf();
+							break;
+						default:
+							saldo -= transf;
+							alert(nome + ' seu saldo atual é de: ' + saldo);
+							inicio();
+							break;
+					}
+				}
+			} else {
+				alert('Senha inválida, tente novamente!');
+				transferencia();
+			}
+		}
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6');
+			inicio();
+		}
+
+		function errologin() {
+			alert('Por favor, insira uma senha válida');
+			entrar();
+		}
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+
+			switch (confirma) {
+				case true:
+					alert('Agradecemos por utilizar nosso serviço! ' + nome + ', foi um prazer ter você aqui!')
+					window.close();
+					break;
+				default:
+					inicio();
+					break;
+			}
+		}
+
+		function entrar() {
+
+			var senha = prompt('Insira sua senha');
+
+			switch (senha) {
+				case '123':
+					inicio();
+					break;
+
+				default:
+					errologin();
+					break;
+			}
+		}
+
+		var nome = prompt('Insira seu nome');
+		alert('É um prazer te ter aqui ' + nome + '!');
+		entrar();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
